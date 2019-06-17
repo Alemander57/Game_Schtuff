@@ -20,10 +20,10 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
 
-            for (int i = 0; i < (); i++)
+            for (int i = 0; i < (this.Width/50); i++)
             {
                 int gridx = (i*50);
-                for (int l = 0; l < 10; l++)
+                for (int l = 0; l < (this.Height/50); l++)
                 {
                     int gridy = (l * 50);
                     floor.Add(new Grid_Items((gridx),(gridy)));
