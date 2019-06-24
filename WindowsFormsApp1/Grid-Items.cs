@@ -9,9 +9,9 @@ namespace WindowsFormsApp1
 {
     class Grid_Items
     {
-        private int x, y, width, height, gridx, gridy;
-        private Image Floor_Image;
-        private Rectangle FloorRec;
+        public int x, y, width, height, gridx, gridy;
+        public Image Floor_Image;
+        public Rectangle FloorRec;
 
         public Grid_Items(int gridx, int gridy)
         {
@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
             y = gridy;
             height = 50;
             width = 50;
-            Floor_Image = Properties.Resources.Base_Grid_Item;
+            Floor_Image = Properties.Resources.Base_Grid_Item2;
 
 
 

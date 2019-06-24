@@ -83,5 +83,11 @@
   <ItemGroup>
     <None Include="Resources\Base-Grid-Item.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Base_Grid_Item2.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Grid_ItemH.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
