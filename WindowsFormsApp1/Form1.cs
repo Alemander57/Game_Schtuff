@@ -60,6 +60,8 @@ namespace WindowsFormsApp1
         private void MainTimer_Tick(object sender, EventArgs e)
         {
             this.Invalidate();
+            Cursor.Position.Y = Cursor.Position.Y+1;
+
 
         }
 
@@ -79,27 +81,43 @@ namespace WindowsFormsApp1
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            foreach (Grid_Items f in floor)
-            {
-                int GMdiffX = e.X - f.gridx;
-                int GMdiffY = e.Y - f.gridy;
-                double Glength = Math.Sqrt(Math.Pow(GMdiffX, 2) + Math.Pow(GMdiffX, 2));
-                if (Glength < 71)
-                {
-                    f.Floor_Image = Properties.Resources.Grid_ItemH;
-                }
             
-               
 
-
-
-            }
         }
 
         private void Form1_MouseHover(object sender, EventArgs e)
         {
-           
+            foreach (Grid_Items f in floor)
+            {
 
+            }
+
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            
+            GridReset.Enabled = false;
+            //gets rid of highlights and then disables until another square is highlighted
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            foreach (Grid_Items f in floor)
+            {
+
+                if (f.FloorRec.Contains(e.Location))
+                {
+                    f.Floor_Image = Properties.Resources.Grid_ItemH;
+                    
+                }
+             
+
+
+
+
+            }
         }
     }
 }

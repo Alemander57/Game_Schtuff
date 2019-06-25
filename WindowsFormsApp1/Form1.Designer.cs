@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.MainTimer = new System.Windows.Forms.Timer(this.components);
+            this.GridReset = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // MainTimer
@@ -37,6 +38,11 @@
             this.MainTimer.Enabled = true;
             this.MainTimer.Interval = 10;
             this.MainTimer.Tick += new System.EventHandler(this.MainTimer_Tick);
+            // 
+            // GridReset
+            // 
+            this.GridReset.Interval = 10;
+            this.GridReset.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -51,6 +57,7 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseHover += new System.EventHandler(this.Form1_MouseHover);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.ResumeLayout(false);
 
         }
@@ -58,6 +65,7 @@
         #endregion
 
         private System.Windows.Forms.Timer MainTimer;
+        private System.Windows.Forms.Timer GridReset;
     }
 }
 
