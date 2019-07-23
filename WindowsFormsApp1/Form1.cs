@@ -19,6 +19,7 @@ namespace WindowsFormsApp1
                 
        BindingList<Grid_Items> floor  = new BindingList<Grid_Items>();
         Player player = new Player();
+        List<Enemy> enemy = new List<Enemy>();
 
         public Form1()
         {
@@ -30,9 +31,14 @@ namespace WindowsFormsApp1
                 for (int l = 0; l < (this.Height / 50); l++)
                 {
                     int gridy = (l * 50);
-                    floor.Add(new Grid_Items((gridx), (gridy),(Xposition),(Yposition)));
+                    floor.Add(new Grid_Items((gridx), (gridy), (Xposition), (Yposition)));
                     Yposition++;
                 }
+            }
+
+            for (int a = 0; a < 4 ; a++)
+            {
+
             }
             
 
@@ -94,6 +100,7 @@ namespace WindowsFormsApp1
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
+            this.Invalidate();
             foreach (Grid_Items f in floor)
             {
                 if (CanMove == true)
@@ -130,8 +137,8 @@ namespace WindowsFormsApp1
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
 
-           // (f.XPosition - 1) * 50 < player.x
-
+            // (f.XPosition - 1) * 50 < player.x
+            this.Invalidate();
 
             foreach (Grid_Items f in floor)
             {
@@ -143,32 +150,20 @@ namespace WindowsFormsApp1
                     MousePosY = f.YPosition;
                 }
 
-                if (f.FloorRec.Contains(e.Location) && (f.XPosition-1)*50 != player.x
-                    && (f.YPosition - 1) * 50 != player.y && (MousePosX - player.PlayerX) <= 3 && (MousePosX - player.PlayerX) >= -3
-                     && (MousePosY - player.PlayerY) <= 3 && (MousePosY - player.PlayerY) >= -3)
-                { f.Floor_Image = Properties.Resources.Grid_ItemH;
-                    CanMove = true;
-                }
-                else if(f.FloorRec.Contains(e.Location) && (f.XPosition - 1) * 50 != player.x
-                    && (f.YPosition - 1) * 50 == player.y && (MousePosX - player.PlayerX) <= 3 && (MousePosX - player.PlayerX) >= -3
-                    && (MousePosY - player.PlayerY) <= 3 && (MousePosY - player.PlayerY) >= -3)
-                {f.Floor_Image = Properties.Resources.Grid_ItemH;
-                    CanMove = true;
-                }
-                else if (f.FloorRec.Contains(e.Location) && (f.XPosition - 1) * 50 == player.x
-                    && (f.YPosition - 1) * 50 != player.y && (MousePosX - player.PlayerX) <= 3 && (MousePosX - player.PlayerX) >= -3
-                    && (MousePosY - player.PlayerY) <= 3 && (MousePosY - player.PlayerY) >= -3)
-                { f.Floor_Image = Properties.Resources.Grid_ItemH;
-                    CanMove = true;
-                }
-                else if(f.FloorRec.Contains(e.Location) && f.FloorRec.IntersectsWith(player.PlayerRec)  )
+                if (f.FloorRec.Contains(e.Location) && f.FloorRec.IntersectsWith(player.PlayerRec))
                 {
                     f.Floor_Image = Properties.Resources.Base_Grid_Item2;
                     CanMove = true;
 
                 }
+                else if (f.FloorRec.Contains(e.Location) && (MousePosX - player.PlayerX) <= 3 && (MousePosX - player.PlayerX) >= -3
+                     && (MousePosY - player.PlayerY) <= 3 && (MousePosY - player.PlayerY) >= -3)
+                {
+                    f.Floor_Image = Properties.Resources.Grid_ItemH;
+                    CanMove = true;
+                }
                 else if (f.FloorRec.Contains(e.Location))
-                    {
+                {
                     f.Floor_Image = Properties.Resources.Grid_ItemN;
                     CanMove = false;
                 }
