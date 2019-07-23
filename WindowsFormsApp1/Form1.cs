@@ -14,7 +14,7 @@ namespace WindowsFormsApp1
     {
         Graphics g;
         
-        int Xposition =0, Yposition = 0, MousePosX,MousePosY,PlayerPosX,PlayerPosY;
+        int Xposition =0, Yposition = 0, MousePosX,MousePosY,PlayerPosX,PlayerPosY,EnPosX=0,EnPosY=0,UV;
         bool CanMove;
                 
        BindingList<Grid_Items> floor  = new BindingList<Grid_Items>();
@@ -38,7 +38,9 @@ namespace WindowsFormsApp1
 
             for (int a = 0; a < 4 ; a++)
             {
-
+                EnPosX++;
+                UV++;
+                enemy.Add(new Enemy(EnPosX,10,UV));
             }
             
 
@@ -62,9 +64,10 @@ namespace WindowsFormsApp1
             foreach (Grid_Items f in floor)
             {
                 f.DrawMap(g);
-
-               
-
+            }
+            foreach(Enemy b in enemy)
+            {
+                b.DrawEnemy(g);
             }
             player.DrawPlayer(g);
            
@@ -109,11 +112,20 @@ namespace WindowsFormsApp1
                     {
                         player.PlayerX = f.XPosition;
                         player.PlayerY = f.YPosition;
-                        player.y = (f.YPosition - 1) * 50;
-                        player.x = (f.XPosition - 1) * 50;
+                        player.y = (player.PlayerY - 1) * 50;
+                        player.x = (player.PlayerX - 1) * 50;
 
 
                     }
+                    foreach (Enemy b in enemy)
+                    { if((b.UV) - player.PlayerX < 0 )
+                        {
+                            
+                            b.x += 50;
+                        }
+
+                    }
+                    
                 }
             }
 

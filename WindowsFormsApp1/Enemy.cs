@@ -9,14 +9,15 @@ namespace WindowsFormsApp1
 {
     class Enemy
     {
-        public int EnemyX, EnemyY, x, y, width, height;
+        public int EnemyX, EnemyY, x, y, width, height,UV;
         public Image EnemyImg;
         public Rectangle EnemyRec;
 
-        public Enemy() //number one
+        public Enemy(int EnemyX,int EnemyY,int boy) //number one
         {
-            x = EnemyX;
-            y = EnemyY;
+            x = (EnemyX-1)*50;
+            y = (EnemyY-1)*50;
+            UV = boy;
             width = 50;
             height = 50;
             EnemyImg = Properties.Resources.Alien;
@@ -26,7 +27,7 @@ namespace WindowsFormsApp1
 
 
         }
-        public void DrawPlayer(Graphics g)
+        public void DrawEnemy(Graphics g)
         {
             EnemyRec = new Rectangle(x, y, width, height);
             g.DrawImage(EnemyImg, EnemyRec);
