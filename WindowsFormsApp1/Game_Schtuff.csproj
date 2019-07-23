@@ -52,6 +52,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Grid-Items.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -88,6 +89,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Grid_ItemH.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Grid_Player.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alien.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Grid_ItemH1.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

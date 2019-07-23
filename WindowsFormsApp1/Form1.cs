@@ -13,8 +13,12 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         Graphics g;
-
-       List<Grid_Items> floor  = new List<Grid_Items>();
+        
+        int Xposition =0, Yposition = 0, MousePosX,MousePosY,PlayerPosX,PlayerPosY;
+        bool CanMove;
+                
+       BindingList<Grid_Items> floor  = new BindingList<Grid_Items>();
+        Player player = new Player();
 
         public Form1()
         {
@@ -22,14 +26,17 @@ namespace WindowsFormsApp1
             for (int i = 0; i < (this.Width / 50); i++)
             {
                 int gridx = (i * 50);
+                Xposition++;
                 for (int l = 0; l < (this.Height / 50); l++)
                 {
                     int gridy = (l * 50);
-                    floor.Add(new Grid_Items((gridx), (gridy)));
+                    floor.Add(new Grid_Items((gridx), (gridy),(Xposition),(Yposition)));
+                    Yposition++;
                 }
             }
+            
 
-
+          
 
 
         }
@@ -50,47 +57,64 @@ namespace WindowsFormsApp1
             {
                 f.DrawMap(g);
 
-
+               
 
             }
-
+            player.DrawPlayer(g);
+           
 
         }
 
         private void MainTimer_Tick(object sender, EventArgs e)
         {
             this.Invalidate();
-            Cursor.Position.Y = Cursor.Position.Y+1;
+            foreach (Grid_Items f in floor)
+            {
+               
+            }
+
 
 
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            floor.Clear();
-            for (int i = 0; i < ((this.Width / 50)+1); i++)
-            {
-                int gridx = (i * 50);
-                for (int l = 0; l < ((this.Height / 50)+1); l++)
-                {
-                    int gridy = (l * 50);
-                    floor.Add(new Grid_Items((gridx), (gridy)));
-                }
-            }
-        }
+           // floor.Clear();
+           // for (int i = 0; i < ((this.Width / 50)+1); i++)
+           // {
+                
+           //     int gridx = (i * 50);
+            //    for (int l = 0; l < ((this.Height / 50)+1); l++)
+           //     {
+          //          int gridy = (l * 50);
+          //          floor.Add(new Grid_Items((gridx), (gridy)));
+           //     }
+           // }
+      }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            
+            foreach (Grid_Items f in floor)
+            {
+                if (CanMove == true)
+                {
+                    if (f.FloorRec.Contains(e.Location))
+                    {
+                        player.PlayerX = f.XPosition;
+                        player.PlayerY = f.YPosition;
+                        player.y = (f.YPosition - 1) * 50;
+                        player.x = (f.XPosition - 1) * 50;
+
+
+                    }
+                }
+            }
 
         }
 
         private void Form1_MouseHover(object sender, EventArgs e)
         {
-            foreach (Grid_Items f in floor)
-            {
-
-            }
+            
 
 
         }
@@ -101,23 +125,65 @@ namespace WindowsFormsApp1
             GridReset.Enabled = false;
             //gets rid of highlights and then disables until another square is highlighted
         }
+      
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
+
+           // (f.XPosition - 1) * 50 < player.x
+
+
             foreach (Grid_Items f in floor)
             {
-
                 if (f.FloorRec.Contains(e.Location))
-                {
-                    f.Floor_Image = Properties.Resources.Grid_ItemH;
-                    
+                    {
+                    XPosBox.Text = f.XPosition.ToString();
+                    YPosBox.Text = f.YPosition.ToString();
+                    MousePosX = f.XPosition;
+                    MousePosY = f.YPosition;
                 }
-             
 
+                if (f.FloorRec.Contains(e.Location) && (f.XPosition-1)*50 != player.x
+                    && (f.YPosition - 1) * 50 != player.y && (MousePosX - player.PlayerX) <= 3 && (MousePosX - player.PlayerX) >= -3
+                     && (MousePosY - player.PlayerY) <= 3 && (MousePosY - player.PlayerY) >= -3)
+                { f.Floor_Image = Properties.Resources.Grid_ItemH;
+                    CanMove = true;
+                }
+                else if(f.FloorRec.Contains(e.Location) && (f.XPosition - 1) * 50 != player.x
+                    && (f.YPosition - 1) * 50 == player.y && (MousePosX - player.PlayerX) <= 3 && (MousePosX - player.PlayerX) >= -3
+                    && (MousePosY - player.PlayerY) <= 3 && (MousePosY - player.PlayerY) >= -3)
+                {f.Floor_Image = Properties.Resources.Grid_ItemH;
+                    CanMove = true;
+                }
+                else if (f.FloorRec.Contains(e.Location) && (f.XPosition - 1) * 50 == player.x
+                    && (f.YPosition - 1) * 50 != player.y && (MousePosX - player.PlayerX) <= 3 && (MousePosX - player.PlayerX) >= -3
+                    && (MousePosY - player.PlayerY) <= 3 && (MousePosY - player.PlayerY) >= -3)
+                { f.Floor_Image = Properties.Resources.Grid_ItemH;
+                    CanMove = true;
+                }
+                else if(f.FloorRec.Contains(e.Location) && f.FloorRec.IntersectsWith(player.PlayerRec)  )
+                {
+                    f.Floor_Image = Properties.Resources.Base_Grid_Item2;
+                    CanMove = true;
 
+                }
+                else if (f.FloorRec.Contains(e.Location))
+                    {
+                    f.Floor_Image = Properties.Resources.Grid_ItemN;
+                    CanMove = false;
+                }
+                else
+                {
+                  f.Floor_Image = Properties.Resources.Base_Grid_Item2;
+                }
 
-
+               
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -9,12 +9,14 @@ namespace WindowsFormsApp1
 {
     class Grid_Items
     {
-        public int x, y, width, height, gridx, gridy;
+        public int x, y, width, height, gridx, gridy, XPosition, YPosition;
         public Image Floor_Image;
         public Rectangle FloorRec;
 
-        public Grid_Items(int gridx, int gridy)
+        public Grid_Items(int gridx, int gridy, int InputX, int InputY)
         {
+            XPosition = InputX;
+            YPosition = InputY-((InputX -1)*10)+1;
             x = gridx;
             y = gridy;
             height = 50;
@@ -29,13 +31,6 @@ namespace WindowsFormsApp1
             FloorRec = new Rectangle(x, y, width, height);
             g.DrawImage(Floor_Image, FloorRec);
         }
-        public int changesx
-        {
-            set
-            {
-                x = value;
-                y = value;
-            }
-        }
+        
     }
 }
