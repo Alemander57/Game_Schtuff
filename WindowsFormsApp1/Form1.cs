@@ -54,6 +54,11 @@ namespace WindowsFormsApp1
 
         }
 
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             
@@ -77,6 +82,11 @@ namespace WindowsFormsApp1
         private void MainTimer_Tick(object sender, EventArgs e)
         {
             this.Invalidate();
+            foreach (Enemy b in enemy)
+            {
+               // b.x = (b.EnemyX - 1) * 50;
+                //b.y = (b.EnemyY - 1) * 50;
+            }
             foreach (Grid_Items f in floor)
             {
                
@@ -103,9 +113,33 @@ namespace WindowsFormsApp1
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            this.Invalidate();
+
+
+            
+                foreach (Enemy b in enemy)
+                {
+                    //if ((b.EnemyX) - player.PlayerX < 0)
+                    //{
+                    b.EnemyX++;
+                    //}
+                    //else if ((b.EnemyX) - player.PlayerX > 0)
+                    // {
+                   // b.EnemyX--;
+                    // }
+                }
+            
             foreach (Grid_Items f in floor)
             {
+
+
+                   foreach(Enemy b in enemy)
+                   {
+                    if (b.EnemyRec.IntersectsWith(f.FloorRec))
+                    {
+                        b.EnemyX = f.XPosition;
+                        b.EnemyY = f.YPosition;
+                    }
+                   }
                 if (CanMove == true)
                 {
                     if (f.FloorRec.Contains(e.Location))
@@ -117,17 +151,47 @@ namespace WindowsFormsApp1
 
 
                     }
-                    foreach (Enemy b in enemy)
-                    { if((b.UV) - player.PlayerX < 0 )
-                        {
-                            
-                            b.x += 50;
-                        }
-
-                    }
+                    
                     
                 }
             }
+
+
+            foreach (Enemy b in enemy)
+            {
+                if (b.EnemyRec.Contains(e.Location))
+                {
+                    EnXDisp.Text = b.EnemyX.ToString();
+                    //YPosBox.Text = b.YPosition.ToString();
+                }
+
+
+
+                //    if ((b.EnemyX) - player.PlayerX < 0)
+                //    {
+                //        b.EnemyX++;
+                //    }
+                //    else if ((b.EnemyX) - player.PlayerX > 0)
+                //    {
+                //        b.EnemyX--;
+                //    }
+                //    if ((b.EnemyY) - player.PlayerY < 0)
+                //    {
+                //        b.EnemyY++;
+                //    }
+                //    else if ((b.EnemyY) - player.PlayerY > 0)
+                //    {
+                //        b.EnemyY--;
+            }
+
+
+
+            //}
+
+
+
+
+
 
         }
 
@@ -150,7 +214,7 @@ namespace WindowsFormsApp1
         {
 
             // (f.XPosition - 1) * 50 < player.x
-            this.Invalidate();
+            
 
             foreach (Grid_Items f in floor)
             {
