@@ -14,8 +14,9 @@ namespace WindowsFormsApp1
     {
         Graphics g;
         
-        int Xposition =0, Yposition = 0, MousePosX,MousePosY,PlayerPosX,PlayerPosY,EnPosX=0,EnPosY=0,UV;
-        bool CanMove;
+        int Xposition =0, Yposition = 0, MousePosX,MousePosY,PlayerPosX,PlayerPosY,EnPosX=4,EnPosY=5,UV;
+        bool CanMove, CanShoot, ShootOrMove;
+        Random rnd = new Random();
                 
        BindingList<Grid_Items> floor  = new BindingList<Grid_Items>();
         Player player = new Player();
@@ -39,8 +40,9 @@ namespace WindowsFormsApp1
             for (int a = 0; a < 4 ; a++)
             {
                 EnPosX++;
+                EnPosY++;
                 UV++;
-                enemy.Add(new Enemy(EnPosX,10,UV));
+                enemy.Add(new Enemy(EnPosX, EnPosY, UV));
             }
             
 
@@ -57,6 +59,14 @@ namespace WindowsFormsApp1
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Space)
+            {
+
+            }
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -113,21 +123,45 @@ namespace WindowsFormsApp1
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-
-
-            
-                foreach (Enemy b in enemy)
+            foreach (Enemy b in enemy)
+            {
+                if (CanMove == true | CanShoot == true)
                 {
-                    //if ((b.EnemyX) - player.PlayerX < 0)
-                    //{
-                    b.EnemyX++;
-                    //}
-                    //else if ((b.EnemyX) - player.PlayerX > 0)
-                    // {
-                   // b.EnemyX--;
-                    // }
+                    if ((b.EnemyX) - player.PlayerX < 0)
+                    {
+                        b.EnemyX = rnd.Next(b.EnemyX+1,b.EnemyX+3);
+                    }
+                    else if ((b.EnemyX) - player.PlayerX > 0)
+                    {
+                        b.EnemyX = 10 - rnd.Next(b.EnemyX+1,b.EnemyX+3) ;
+                    }
+
+                    if ((b.EnemyY) - player.PlayerY < 0)
+                    {
+                        b.EnemyY = rnd.Next(b.EnemyY+1,b.EnemyY+3);
+                    }
+                    else if ((b.EnemyY) - player.PlayerY > 0)
+                    {
+                        b.EnemyY = 10 - rnd.Next(b.EnemyY+1,b.EnemyY+3);
+                    }
+                    //if(b.EnemyX < 1)
+                    //{ b.EnemyX = 1; }
+
+                    //if (b.EnemyX > 10)
+                    //{ b.EnemyX = 10; }
+
+                    //if (b.EnemyY < 1)
+                    //{ b.EnemyY = 1; }
+
+                    //if (b.EnemyY > 10)
+                    //{ b.EnemyY = 10; }
+
+                    b.y = (b.EnemyY - 1) * 50;
+                    b.x = (b.EnemyX - 1) * 50;
                 }
-            
+               
+            }
+
             foreach (Grid_Items f in floor)
             {
 
@@ -229,7 +263,7 @@ namespace WindowsFormsApp1
                 if (f.FloorRec.Contains(e.Location) && f.FloorRec.IntersectsWith(player.PlayerRec))
                 {
                     f.Floor_Image = Properties.Resources.Base_Grid_Item2;
-                    CanMove = true;
+                    CanMove = false;
 
                 }
                 else if (f.FloorRec.Contains(e.Location) && (MousePosX - player.PlayerX) <= 3 && (MousePosX - player.PlayerX) >= -3

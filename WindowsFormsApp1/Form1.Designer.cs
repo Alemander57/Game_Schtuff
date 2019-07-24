@@ -53,48 +53,45 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(395, 16);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(296, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 17);
+            this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "XPosition";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(467, 16);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(350, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 17);
+            this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "YPosition";
             // 
             // XPosBox
             // 
             this.XPosBox.Enabled = false;
-            this.XPosBox.Location = new System.Drawing.Point(411, 37);
-            this.XPosBox.Margin = new System.Windows.Forms.Padding(4);
+            this.XPosBox.Location = new System.Drawing.Point(308, 30);
             this.XPosBox.Name = "XPosBox";
-            this.XPosBox.Size = new System.Drawing.Size(31, 22);
+            this.XPosBox.Size = new System.Drawing.Size(24, 20);
             this.XPosBox.TabIndex = 2;
             this.XPosBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // YPosBox
             // 
             this.YPosBox.Enabled = false;
-            this.YPosBox.Location = new System.Drawing.Point(485, 37);
-            this.YPosBox.Margin = new System.Windows.Forms.Padding(4);
+            this.YPosBox.Location = new System.Drawing.Point(364, 30);
             this.YPosBox.Name = "YPosBox";
-            this.YPosBox.Size = new System.Drawing.Size(31, 22);
+            this.YPosBox.Size = new System.Drawing.Size(24, 20);
             this.YPosBox.TabIndex = 3;
             // 
             // EnemyX
             // 
             this.EnemyX.AutoSize = true;
-            this.EnemyX.Location = new System.Drawing.Point(541, 16);
+            this.EnemyX.Location = new System.Drawing.Point(406, 13);
+            this.EnemyX.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.EnemyX.Name = "EnemyX";
-            this.EnemyX.Size = new System.Drawing.Size(60, 17);
+            this.EnemyX.Size = new System.Drawing.Size(46, 13);
             this.EnemyX.TabIndex = 4;
             this.EnemyX.Text = "EnemyX";
             this.EnemyX.Click += new System.EventHandler(this.label3_Click);
@@ -102,16 +99,17 @@
             // EnXDisp
             // 
             this.EnXDisp.Enabled = false;
-            this.EnXDisp.Location = new System.Drawing.Point(544, 37);
+            this.EnXDisp.Location = new System.Drawing.Point(408, 30);
+            this.EnXDisp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EnXDisp.Name = "EnXDisp";
-            this.EnXDisp.Size = new System.Drawing.Size(111, 22);
+            this.EnXDisp.Size = new System.Drawing.Size(84, 20);
             this.EnXDisp.TabIndex = 5;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 615);
+            this.ClientSize = new System.Drawing.Size(500, 500);
             this.Controls.Add(this.EnXDisp);
             this.Controls.Add(this.EnemyX);
             this.Controls.Add(this.YPosBox);
@@ -119,12 +117,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseHover += new System.EventHandler(this.Form1_MouseHover);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
