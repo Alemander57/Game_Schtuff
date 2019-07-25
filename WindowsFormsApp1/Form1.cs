@@ -15,16 +15,17 @@ namespace WindowsFormsApp1
         Graphics g;
         
         int Xposition =0, Yposition = 0, MousePosX,MousePosY,PlayerPosX,PlayerPosY,EnPosX=4,EnPosY=5,UV;
-        bool CanMove, CanShoot, ShootOrMove;
+        bool CanMove, CanShoot, ShootOrMove = true;
         Random rnd = new Random();
                 
        BindingList<Grid_Items> floor  = new BindingList<Grid_Items>();
         Player player = new Player();
         List<Enemy> enemy = new List<Enemy>();
-
+        
         public Form1()
         {
             InitializeComponent();
+            EnXDisp.Text = ShootOrMove.ToString();
             for (int i = 0; i < (this.Width / 50); i++)
             {
                 int gridx = (i * 50);
@@ -65,7 +66,12 @@ namespace WindowsFormsApp1
         {
             if(e.KeyCode == Keys.Space)
             {
+               
+                if (ShootOrMove == false)
+                { ShootOrMove = true; }
 
+              
+                EnXDisp.Text = ShootOrMove.ToString();
             }
         }
 
@@ -129,35 +135,36 @@ namespace WindowsFormsApp1
                 {
                     if ((b.EnemyX) - player.PlayerX < 0)
                     {
-                        b.EnemyX = rnd.Next(b.EnemyX+1,b.EnemyX+3);
+                        b.EnemyX = rnd.Next(b.EnemyX+0,b.EnemyX+3);
                     }
                     else if ((b.EnemyX) - player.PlayerX > 0)
                     {
-                        b.EnemyX = 10 - rnd.Next(b.EnemyX+1,b.EnemyX+3) ;
+                        b.EnemyX = b.EnemyX - rnd.Next(0,3) ;
                     }
 
                     if ((b.EnemyY) - player.PlayerY < 0)
                     {
-                        b.EnemyY = rnd.Next(b.EnemyY+1,b.EnemyY+3);
+                        b.EnemyY = rnd.Next(b.EnemyY+0,b.EnemyY+3);
                     }
                     else if ((b.EnemyY) - player.PlayerY > 0)
                     {
-                        b.EnemyY = 10 - rnd.Next(b.EnemyY+1,b.EnemyY+3);
+                        b.EnemyY = b.EnemyY - rnd.Next(0,3);
                     }
-                    //if(b.EnemyX < 1)
-                    //{ b.EnemyX = 1; }
+                    if (b.EnemyX < 1)
+                    { b.EnemyX = 1; }
 
-                    //if (b.EnemyX > 10)
-                    //{ b.EnemyX = 10; }
+                    if (b.EnemyX > 10)
+                    { b.EnemyX = 10; }
 
-                    //if (b.EnemyY < 1)
-                    //{ b.EnemyY = 1; }
+                    if (b.EnemyY < 1)
+                    { b.EnemyY = 1; }
 
-                    //if (b.EnemyY > 10)
-                    //{ b.EnemyY = 10; }
+                    if (b.EnemyY > 10)
+                    { b.EnemyY = 10; }
 
                     b.y = (b.EnemyY - 1) * 50;
                     b.x = (b.EnemyX - 1) * 50;
+                    ShootOrMove = false;
                 }
                
             }
@@ -174,6 +181,16 @@ namespace WindowsFormsApp1
                         b.EnemyY = f.YPosition;
                     }
                    }
+                if (CanShoot == true)
+                {
+                     foreach(Enemy b in enemy)
+                    {
+                        if (b.EnemyRec.IntersectsWith(f.FloorRec) && f.FloorRec.Contains(e.Location))
+                            {
+                             enemy.Remove(b);
+                            }
+                    }
+                }
                 if (CanMove == true)
                 {
                     if (f.FloorRec.Contains(e.Location))
@@ -191,36 +208,19 @@ namespace WindowsFormsApp1
             }
 
 
-            foreach (Enemy b in enemy)
-            {
-                if (b.EnemyRec.Contains(e.Location))
-                {
-                    EnXDisp.Text = b.EnemyX.ToString();
-                    //YPosBox.Text = b.YPosition.ToString();
-                }
+           
+               
+              
+              
 
 
 
-                //    if ((b.EnemyX) - player.PlayerX < 0)
-                //    {
-                //        b.EnemyX++;
-                //    }
-                //    else if ((b.EnemyX) - player.PlayerX > 0)
-                //    {
-                //        b.EnemyX--;
-                //    }
-                //    if ((b.EnemyY) - player.PlayerY < 0)
-                //    {
-                //        b.EnemyY++;
-                //    }
-                //    else if ((b.EnemyY) - player.PlayerY > 0)
-                //    {
-                //        b.EnemyY--;
-            }
+                
+            
 
 
 
-            //}
+           
 
 
 
@@ -263,19 +263,30 @@ namespace WindowsFormsApp1
                 if (f.FloorRec.Contains(e.Location) && f.FloorRec.IntersectsWith(player.PlayerRec))
                 {
                     f.Floor_Image = Properties.Resources.Base_Grid_Item2;
-                    CanMove = false;
+                    if (ShootOrMove == false)
+                    { CanMove = false; }
+                    if(ShootOrMove == true)
+                    { CanShoot = false; }
+                        
 
-                }
+
+                    }
                 else if (f.FloorRec.Contains(e.Location) && (MousePosX - player.PlayerX) <= 3 && (MousePosX - player.PlayerX) >= -3
                      && (MousePosY - player.PlayerY) <= 3 && (MousePosY - player.PlayerY) >= -3)
                 {
                     f.Floor_Image = Properties.Resources.Grid_ItemH;
-                    CanMove = true;
+                    if (ShootOrMove == false)
+                    { CanMove = true; }
+                    if (ShootOrMove == true)
+                    { CanShoot = true; }
                 }
                 else if (f.FloorRec.Contains(e.Location))
                 {
                     f.Floor_Image = Properties.Resources.Grid_ItemN;
-                    CanMove = false;
+                    if (ShootOrMove == false)
+                    { CanMove = true; }
+                    if (ShootOrMove == true)
+                    { CanShoot = true; }
                 }
                 else
                 {
