@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.MainTimer = new System.Windows.Forms.Timer(this.components);
-            this.GridReset = new System.Windows.Forms.Timer(this.components);
+            this.MoveAnimation = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.XPosBox = new System.Windows.Forms.TextBox();
@@ -45,10 +45,11 @@
             this.MainTimer.Interval = 10;
             this.MainTimer.Tick += new System.EventHandler(this.MainTimer_Tick);
             // 
-            // GridReset
+            // MoveAnimation
             // 
-            this.GridReset.Interval = 10;
-            this.GridReset.Tick += new System.EventHandler(this.timer1_Tick);
+            this.MoveAnimation.Enabled = true;
+            this.MoveAnimation.Interval = 20;
+            this.MoveAnimation.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // label1
             // 
@@ -100,7 +101,7 @@
             // 
             this.EnXDisp.Enabled = false;
             this.EnXDisp.Location = new System.Drawing.Point(408, 30);
-            this.EnXDisp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EnXDisp.Margin = new System.Windows.Forms.Padding(2);
             this.EnXDisp.Name = "EnXDisp";
             this.EnXDisp.Size = new System.Drawing.Size(84, 20);
             this.EnXDisp.TabIndex = 5;
@@ -134,7 +135,7 @@
         #endregion
 
         private System.Windows.Forms.Timer MainTimer;
-        private System.Windows.Forms.Timer GridReset;
+        private System.Windows.Forms.Timer MoveAnimation;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox XPosBox;

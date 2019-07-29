@@ -171,10 +171,8 @@ namespace WindowsFormsApp1
 
                     if (b.EnemyY > 10)
                     { b.EnemyY = 10; }
-
-                    b.y = (b.EnemyY - 1) * 50;
-                    b.x = (b.EnemyX - 1) * 50;
                     ShootOrMove = false;
+                    MoveAnimation.Enabled = true;
                 }
                
             }
@@ -187,8 +185,8 @@ namespace WindowsFormsApp1
                    {
                     if (b.EnemyRec.IntersectsWith(f.FloorRec))
                     {
-                        b.EnemyX = f.XPosition;
-                        b.EnemyY = f.YPosition;
+                        //b.EnemyX = f.XPosition;
+                        //b.EnemyY = f.YPosition;
                     }
                    }
                 if (CanShoot == true && CanMove == false)
@@ -229,8 +227,30 @@ namespace WindowsFormsApp1
         private void timer1_Tick(object sender, EventArgs e)
         {
             
-            GridReset.Enabled = false;
-            //gets rid of highlights and then disables until another square is highlighted
+            foreach (Enemy b in enemy)
+            {
+                if(b.x < (b.EnemyX - 1) * 50 )
+                {
+                    b.x+=5;
+                }
+                if (b.y < (b.EnemyY - 1) * 50)
+                {
+                    b.y+=5;
+                }
+                if (b.x > (b.EnemyX - 1) * 50)
+                {
+                    b.x -=5;
+                }
+                if (b.y > (b.EnemyY - 1) * 50)
+                {
+                    b.y-=5;
+                }
+
+                if(b.x == b.EnemyX - 1) * 50 &&)
+            }
+
+
+           
         }
       
 
