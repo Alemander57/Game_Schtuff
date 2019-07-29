@@ -15,7 +15,7 @@ namespace WindowsFormsApp1
         Graphics g;
         
         int Xposition =0, Yposition = 0, MousePosX,MousePosY,PlayerPosX,PlayerPosY,EnPosX=4,EnPosY=5,UV;
-        bool CanMove, CanShoot, ShootOrMove = true;
+        bool CanMove =true , CanShoot = false, ShootOrMove = false;
         Random rnd = new Random();
                 
        BindingList<Grid_Items> floor  = new BindingList<Grid_Items>();
@@ -26,6 +26,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             EnXDisp.Text = ShootOrMove.ToString();
+           
             for (int i = 0; i < (this.Width / 50); i++)
             {
                 int gridx = (i * 50);
@@ -64,16 +65,17 @@ namespace WindowsFormsApp1
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Space)
+            if(e.KeyCode == Keys.Z)
             {
-               
-                if (ShootOrMove == false)
-                { ShootOrMove = true; }
-
-              
-                EnXDisp.Text = ShootOrMove.ToString();
+                 ShootOrMove = true;
+                 
             }
-        }
+            if (e.KeyCode == Keys.X)
+            {
+                ShootOrMove = false;
+               
+            }
+            }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -103,11 +105,19 @@ namespace WindowsFormsApp1
                // b.x = (b.EnemyX - 1) * 50;
                 //b.y = (b.EnemyY - 1) * 50;
             }
+            if (ShootOrMove == false)
+            {
+                CanShoot = false;
+            }
+            if (ShootOrMove == true)
+            {
+                CanMove = false;
+            }
             foreach (Grid_Items f in floor)
             {
                
             }
-
+            EnXDisp.Text = ShootOrMove.ToString();
 
 
         }
@@ -181,17 +191,18 @@ namespace WindowsFormsApp1
                         b.EnemyY = f.YPosition;
                     }
                    }
-                if (CanShoot == true)
+                if (CanShoot == true && CanMove == false)
                 {
                      foreach(Enemy b in enemy)
                     {
                         if (b.EnemyRec.IntersectsWith(f.FloorRec) && f.FloorRec.Contains(e.Location))
                             {
                              enemy.Remove(b);
+                            break;
                             }
                     }
                 }
-                if (CanMove == true)
+                if (CanMove == true && CanShoot == false)
                 {
                     if (f.FloorRec.Contains(e.Location))
                     {
@@ -206,27 +217,6 @@ namespace WindowsFormsApp1
                     
                 }
             }
-
-
-           
-               
-              
-              
-
-
-
-                
-            
-
-
-
-           
-
-
-
-
-
-
         }
 
         private void Form1_MouseHover(object sender, EventArgs e)
@@ -245,12 +235,7 @@ namespace WindowsFormsApp1
       
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
-
-            // (f.XPosition - 1) * 50 < player.x
-            
-
-            foreach (Grid_Items f in floor)
+        { foreach (Grid_Items f in floor)
             {
                 if (f.FloorRec.Contains(e.Location))
                     {
@@ -265,18 +250,17 @@ namespace WindowsFormsApp1
                     f.Floor_Image = Properties.Resources.Base_Grid_Item2;
                     if (ShootOrMove == false)
                     { CanMove = false; }
+
                     if(ShootOrMove == true)
                     { CanShoot = false; }
-                        
-
-
-                    }
+                }
                 else if (f.FloorRec.Contains(e.Location) && (MousePosX - player.PlayerX) <= 3 && (MousePosX - player.PlayerX) >= -3
                      && (MousePosY - player.PlayerY) <= 3 && (MousePosY - player.PlayerY) >= -3)
                 {
                     f.Floor_Image = Properties.Resources.Grid_ItemH;
                     if (ShootOrMove == false)
                     { CanMove = true; }
+
                     if (ShootOrMove == true)
                     { CanShoot = true; }
                 }
@@ -284,9 +268,10 @@ namespace WindowsFormsApp1
                 {
                     f.Floor_Image = Properties.Resources.Grid_ItemN;
                     if (ShootOrMove == false)
-                    { CanMove = true; }
+                    { CanMove = false; }
+
                     if (ShootOrMove == true)
-                    { CanShoot = true; }
+                    { CanShoot = false; }
                 }
                 else
                 {
