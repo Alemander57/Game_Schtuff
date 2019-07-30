@@ -42,12 +42,11 @@
             // MainTimer
             // 
             this.MainTimer.Enabled = true;
-            this.MainTimer.Interval = 10;
+            this.MainTimer.Interval = 20;
             this.MainTimer.Tick += new System.EventHandler(this.MainTimer_Tick);
             // 
             // MoveAnimation
             // 
-            this.MoveAnimation.Enabled = true;
             this.MoveAnimation.Interval = 20;
             this.MoveAnimation.Tick += new System.EventHandler(this.timer1_Tick);
             // 

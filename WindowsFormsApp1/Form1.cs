@@ -14,7 +14,8 @@ namespace WindowsFormsApp1
     {
         Graphics g;
         
-        int Xposition =0, Yposition = 0, MousePosX,MousePosY,PlayerPosX,PlayerPosY,EnPosX=4,EnPosY=5,UV;
+        int Xposition =0, Yposition = 0, MousePosX,MousePosY,PlayerPosX,PlayerPosY,EnPosX=4,EnPosY=5,UV,
+            AddEnemyC;
         bool CanMove =true , CanShoot = false, ShootOrMove = false;
         Random rnd = new Random();
                 
@@ -44,10 +45,25 @@ namespace WindowsFormsApp1
                 EnPosX++;
                 EnPosY++;
                 UV++;
-                enemy.Add(new Enemy(EnPosX, EnPosY, UV));
+                enemy.Add(new Enemy(EnPosX, EnPosY));
             }
             
-
+            foreach (Grid_Items f in floor)
+            {
+                if (player.PlayerRec.IntersectsWith(f.FloorRec))
+                {
+                    player.PlayerX = f.XPosition;
+                    player.PlayerY = f.YPosition;
+                }
+                foreach (Enemy b in enemy)
+                {
+                    if (b.EnemyRec.IntersectsWith(f.FloorRec))
+                    {
+                        b.EnemyX = f.XPosition;
+                        b.EnemyY = f.YPosition;
+                    }
+                }
+            }
           
 
 
@@ -139,11 +155,57 @@ namespace WindowsFormsApp1
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            foreach (Enemy b in enemy)
+            MoveAnimation.Enabled = true;
+            AddEnemyC++;
+                if (AddEnemyC == 5)
+            {
+                enemy.Add(new Enemy((rnd.Next(1, 11)), (rnd.Next(1, 11))));
+                AddEnemyC = 0;
+                
+            }
+            foreach (Grid_Items f in floor)
+            {
+
+
+                foreach (Enemy b in enemy)
+                {
+                    if (b.EnemyRec.IntersectsWith(f.FloorRec))
+                    {
+                        //b.EnemyX = f.XPosition;
+                        //b.EnemyY = f.YPosition;
+                    }
+                }
+                if (CanShoot == true && CanMove == false)
+                {
+                    foreach (Enemy b in enemy)
+                    {
+                        if (b.EnemyRec.IntersectsWith(f.FloorRec) && f.FloorRec.Contains(e.Location))
+                        {
+                            enemy.Remove(b);
+                            break;
+                        }
+                    }
+                }
+                if (CanMove == true && CanShoot == false)
+                {
+                    if (f.FloorRec.Contains(e.Location))
+                    {
+                        player.PlayerX = f.XPosition;
+                        player.PlayerY = f.YPosition;
+
+
+                    }
+
+
+                }
+            }
+            foreach (Enemy b in enemy) // b for bad
             {
                 if (CanMove == true | CanShoot == true)
                 {
-                    if ((b.EnemyX) - player.PlayerX < 0)
+                    foreach (Enemy eb in enemy) // eb for "Extra Bad"
+                    {
+                        if ((b.EnemyX) - player.PlayerX < 0)
                     {
                         b.EnemyX = rnd.Next(b.EnemyX+0,b.EnemyX+3);
                     }
@@ -160,6 +222,10 @@ namespace WindowsFormsApp1
                     {
                         b.EnemyY = b.EnemyY - rnd.Next(0,3);
                     }
+                    
+                       
+                    }
+
                     if (b.EnemyX < 1)
                     { b.EnemyX = 1; }
 
@@ -171,50 +237,14 @@ namespace WindowsFormsApp1
 
                     if (b.EnemyY > 10)
                     { b.EnemyY = 10; }
+
                     ShootOrMove = false;
                     MoveAnimation.Enabled = true;
                 }
                
             }
 
-            foreach (Grid_Items f in floor)
-            {
-
-
-                   foreach(Enemy b in enemy)
-                   {
-                    if (b.EnemyRec.IntersectsWith(f.FloorRec))
-                    {
-                        //b.EnemyX = f.XPosition;
-                        //b.EnemyY = f.YPosition;
-                    }
-                   }
-                if (CanShoot == true && CanMove == false)
-                {
-                     foreach(Enemy b in enemy)
-                    {
-                        if (b.EnemyRec.IntersectsWith(f.FloorRec) && f.FloorRec.Contains(e.Location))
-                            {
-                             enemy.Remove(b);
-                            break;
-                            }
-                    }
-                }
-                if (CanMove == true && CanShoot == false)
-                {
-                    if (f.FloorRec.Contains(e.Location))
-                    {
-                        player.PlayerX = f.XPosition;
-                        player.PlayerY = f.YPosition;
-                        player.y = (player.PlayerY - 1) * 50;
-                        player.x = (player.PlayerX - 1) * 50;
-
-
-                    }
-                    
-                    
-                }
-            }
+            
         }
 
         private void Form1_MouseHover(object sender, EventArgs e)
@@ -245,12 +275,30 @@ namespace WindowsFormsApp1
                 {
                     b.y-=5;
                 }
-
-                if(b.x == b.EnemyX - 1) * 50 &&)
+                
+                //if(b.x == (b.EnemyX - 1) * 50 && b.y == (b.EnemyY -1)*50)
+                //{
+                //    MoveAnimation.Enabled = false;
+                //}
+            }
+            if (player.x < (player.PlayerX - 1) * 50)
+            {
+                player.x += 5;
+            }
+            if (player.y < (player.PlayerY - 1) * 50)
+            {
+                player.y += 5;
+            }
+            if (player.x > (player.PlayerX - 1) * 50)
+            {
+                player.x -= 5;
+            }
+            if (player.y > (player.PlayerY - 1) * 50)
+            {
+                player.y -= 5;
             }
 
 
-           
         }
       
 

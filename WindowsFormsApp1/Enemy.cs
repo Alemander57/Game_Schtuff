@@ -13,11 +13,11 @@ namespace WindowsFormsApp1
         public Image EnemyImg;
         public Rectangle EnemyRec;
 
-        public Enemy(int EnemyX,int EnemyY,int boy) //number one
+        public Enemy(int EnemyX,int EnemyY) //number one
         {
             x = (EnemyX-1)*50;
             y = (EnemyY-1)*50;
-            UV = boy;
+     
             width = 50;
             height = 50;
             EnemyImg = Properties.Resources.Alien;
