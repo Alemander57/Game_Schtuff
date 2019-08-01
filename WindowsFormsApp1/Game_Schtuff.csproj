@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accuracy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accuracy.Designer.cs">
+      <DependentUpon>Accuracy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Enemy.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -56,6 +62,9 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Accuracy.resx">
+      <DependentUpon>Accuracy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

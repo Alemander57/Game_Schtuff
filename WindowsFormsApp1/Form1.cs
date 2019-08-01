@@ -59,13 +59,15 @@ namespace WindowsFormsApp1
                 {
                     if (b.EnemyRec.IntersectsWith(f.FloorRec))
                     {
-                        b.EnemyX = f.XPosition;
-                        b.EnemyY = f.YPosition;
+                        b.EnemyPosX = f.XPosition;
+                        b.EnemyPosY = f.YPosition;
                     }
+                    b.SavePosX = b.EnemyPosX;
+                    b.SavePosY = b.EnemyPosY;
+
                 }
             }
           
-
 
         }
 
@@ -118,8 +120,8 @@ namespace WindowsFormsApp1
             this.Invalidate();
             foreach (Enemy b in enemy)
             {
-               // b.x = (b.EnemyX - 1) * 50;
-                //b.y = (b.EnemyY - 1) * 50;
+               // b.x = (b.EnemyPosX - 1) * 50;
+                //b.y = (b.EnemyPosY - 1) * 50;
             }
             if (ShootOrMove == false)
             {
@@ -171,8 +173,8 @@ namespace WindowsFormsApp1
                 {
                     if (b.EnemyRec.IntersectsWith(f.FloorRec))
                     {
-                        //b.EnemyX = f.XPosition;
-                        //b.EnemyY = f.YPosition;
+                        //b.EnemyPosX = f.XPosition;
+                        //b.EnemyPosY = f.YPosition;
                     }
                 }
                 if (CanShoot == true && CanMove == false)
@@ -201,45 +203,70 @@ namespace WindowsFormsApp1
             }
             foreach (Enemy b in enemy) // b for bad
             {
+                
                 if (CanMove == true | CanShoot == true)
                 {
+                  
+                        if ((b.EnemyPosX) - player.PlayerX < 0)
+                    {
+                        b.EnemyPosX = rnd.Next(b.EnemyPosX+0,b.EnemyPosX+3);
+                    }
+                    else if ((b.EnemyPosX) - player.PlayerX > 0)
+                    {
+                        b.EnemyPosX = b.EnemyPosX - rnd.Next(0,3) ;
+                    }
+
+                    if ((b.EnemyPosY) - player.PlayerY < 0)
+                    {
+                        b.EnemyPosY = rnd.Next(b.EnemyPosY+0,b.EnemyPosY+3);
+                    }
+                    else if ((b.EnemyPosY) - player.PlayerY > 0)
+                    {
+                        b.EnemyPosY = b.EnemyPosY - rnd.Next(0,3);
+                    }
+
                     foreach (Enemy eb in enemy) // eb for "Extra Bad"
                     {
-                        if ((b.EnemyX) - player.PlayerX < 0)
-                    {
-                        b.EnemyX = rnd.Next(b.EnemyX+0,b.EnemyX+3);
-                    }
-                    else if ((b.EnemyX) - player.PlayerX > 0)
-                    {
-                        b.EnemyX = b.EnemyX - rnd.Next(0,3) ;
+                        if (b.EnemyPosX == eb.EnemyPosX && b.EnemyPosY == eb.EnemyPosY)
+                        {
+
+                            if (b.EnemyPosX > b.SavePosX)
+                            {
+                                b.EnemyPosX -= 1;
+                            }
+                            else if ((b.EnemyPosX) < b.SavePosX)
+                            {
+                                b.EnemyPosX += 1;
+                            }
+
+                            if (b.EnemyPosY < b.SavePosY)
+                            {
+                                b.EnemyPosY += 1;
+                            }
+                            else if ((b.EnemyPosY) > b.SavePosY)
+                            {
+                                b.EnemyPosY -= 1;
+                            }
+                        }
                     }
 
-                    if ((b.EnemyY) - player.PlayerY < 0)
-                    {
-                        b.EnemyY = rnd.Next(b.EnemyY+0,b.EnemyY+3);
-                    }
-                    else if ((b.EnemyY) - player.PlayerY > 0)
-                    {
-                        b.EnemyY = b.EnemyY - rnd.Next(0,3);
-                    }
-                    
-                       
-                    }
 
-                    if (b.EnemyX < 1)
-                    { b.EnemyX = 1; }
+                    if (b.EnemyPosX < 1)
+                    { b.EnemyPosX = 1; }
 
-                    if (b.EnemyX > 10)
-                    { b.EnemyX = 10; }
+                    if (b.EnemyPosX > 10)
+                    { b.EnemyPosX = 10; }
 
-                    if (b.EnemyY < 1)
-                    { b.EnemyY = 1; }
+                    if (b.EnemyPosY < 1)
+                    { b.EnemyPosY = 1; }
 
-                    if (b.EnemyY > 10)
-                    { b.EnemyY = 10; }
+                    if (b.EnemyPosY > 10)
+                    { b.EnemyPosY = 10; }
 
                     ShootOrMove = false;
                     MoveAnimation.Enabled = true;
+                    b.SavePosX = b.EnemyPosX;
+                    b.SavePosY = b.EnemyPosY;
                 }
                
             }
@@ -259,24 +286,24 @@ namespace WindowsFormsApp1
             
             foreach (Enemy b in enemy)
             {
-                if(b.x < (b.EnemyX - 1) * 50 )
+                if (b.x < (b.EnemyPosX - 1) * 50 )
                 {
                     b.x+=5;
                 }
-                if (b.y < (b.EnemyY - 1) * 50)
+                if (b.y < (b.EnemyPosY - 1) * 50)
                 {
                     b.y+=5;
                 }
-                if (b.x > (b.EnemyX - 1) * 50)
+                if (b.x > (b.EnemyPosX - 1) * 50)
                 {
                     b.x -=5;
                 }
-                if (b.y > (b.EnemyY - 1) * 50)
+                if (b.y > (b.EnemyPosY - 1) * 50)
                 {
                     b.y-=5;
                 }
                 
-                //if(b.x == (b.EnemyX - 1) * 50 && b.y == (b.EnemyY -1)*50)
+                //if(b.x == (b.EnemyPosX - 1) * 50 && b.y == (b.EnemyPosY -1)*50)
                 //{
                 //    MoveAnimation.Enabled = false;
                 //}

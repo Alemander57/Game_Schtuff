@@ -9,14 +9,17 @@ namespace WindowsFormsApp1
 {
     class Enemy
     {
-        public int EnemyX, EnemyY, x, y, width, height,UV;
+        public int EnemyPosX, EnemyPosY, x, y, width, height,SavePosX,SavePosY,HP,MaxHP;
         public Image EnemyImg;
-        public Rectangle EnemyRec;
+        public Rectangle EnemyRec,RedHealth,GreenHealth;
 
         public Enemy(int EnemyX,int EnemyY) //number one
         {
+            EnemyPosX = EnemyX;
+            EnemyPosY = EnemyY;
             x = (EnemyX-1)*50;
             y = (EnemyY-1)*50;
+            HP = 3;
      
             width = 50;
             height = 50;
