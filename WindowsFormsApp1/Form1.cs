@@ -18,8 +18,8 @@ namespace WindowsFormsApp1
             AddEnemyC;
         bool CanMove =true , CanShoot = false, ShootOrMove = false;
         Random rnd = new Random();
-                
-       BindingList<Grid_Items> floor  = new BindingList<Grid_Items>();
+        
+        BindingList<Grid_Items> floor  = new BindingList<Grid_Items>();
         Player player = new Player();
         List<Enemy> enemy = new List<Enemy>();
         
@@ -27,7 +27,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             EnXDisp.Text = ShootOrMove.ToString();
-           
+            
             for (int i = 0; i < (this.Width / 50); i++)
             {
                 int gridx = (i * 50);
@@ -93,7 +93,16 @@ namespace WindowsFormsApp1
                 ShootOrMove = false;
                
             }
+
+            if (e.KeyCode == Keys.Q)
+            {
+                //this.Hide();
+                Accuracy a = new Accuracy();
+                a.Show();
+               // Close.Enabled = true;
             }
+            
+        }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {

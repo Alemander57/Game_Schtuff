@@ -16,5 +16,35 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
+        private void Accuracy_Load(object sender, EventArgs e)
+        {
+
+        }
+
+       public void Close_Tick(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Accuracy_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Accuracy_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.W)
+            {
+                this.Close();
+
+
+            }
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }

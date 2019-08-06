@@ -62,6 +62,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reticle.cs" />
     <EmbeddedResource Include="Accuracy.resx">
       <DependentUpon>Accuracy.cs</DependentUpon>
     </EmbeddedResource>
@@ -111,6 +112,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Grid_ItemH1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reticle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reticle.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
