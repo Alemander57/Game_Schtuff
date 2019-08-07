@@ -12,9 +12,15 @@ namespace WindowsFormsApp1
 {
     public partial class Accuracy : Form
     {
+        Graphics g;
+        int VarSet;
+
         public Accuracy()
-        {
-            InitializeComponent();
+        {InitializeComponent();
+            
+
+
+
         }
 
         private void Accuracy_Load(object sender, EventArgs e)
@@ -25,6 +31,7 @@ namespace WindowsFormsApp1
        public void Close_Tick(object sender, EventArgs e)
         {
             this.Close();
+
         }
 
         private void Accuracy_MouseDown(object sender, MouseEventArgs e)
@@ -45,6 +52,12 @@ namespace WindowsFormsApp1
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void Game_Timer_Tick(object sender, EventArgs e)
+        {
+            //VarSet = Form1.MousePosX;
+            GlobalVarTest.Text = Form1.Test.ToString();
         }
     }
 }

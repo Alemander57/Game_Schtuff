@@ -33,6 +33,7 @@
             this.Close = new System.Windows.Forms.Timer(this.components);
             this.Game_Timer = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.GlobalVarTest = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // panel1
@@ -50,6 +51,12 @@
             this.Close.Interval = 10000;
             this.Close.Tick += new System.EventHandler(this.Close_Tick);
             // 
+            // Game_Timer
+            // 
+            this.Game_Timer.Enabled = true;
+            this.Game_Timer.Interval = 10;
+            this.Game_Timer.Tick += new System.EventHandler(this.Game_Timer_Tick);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -60,11 +67,20 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Accuracy";
             // 
+            // GlobalVarTest
+            // 
+            this.GlobalVarTest.Enabled = false;
+            this.GlobalVarTest.Location = new System.Drawing.Point(343, 12);
+            this.GlobalVarTest.Name = "GlobalVarTest";
+            this.GlobalVarTest.Size = new System.Drawing.Size(100, 20);
+            this.GlobalVarTest.TabIndex = 2;
+            // 
             // Accuracy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(466, 450);
+            this.Controls.Add(this.GlobalVarTest);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Name = "Accuracy";
@@ -83,5 +99,6 @@
         private System.Windows.Forms.Timer Close;
         private System.Windows.Forms.Timer Game_Timer;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox GlobalVarTest;
     }
 }

@@ -13,13 +13,14 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         Graphics g;
-        
-        int Xposition =0, Yposition = 0, MousePosX,MousePosY,PlayerPosX,PlayerPosY,EnPosX=4,EnPosY=5,UV,
+
+        public int Xposition = 0, Yposition = 0, MousePosX, MousePosY, PlayerPosX, PlayerPosY, EnPosX = 4, EnPosY = 5, UV,
             AddEnemyC;
-        bool CanMove =true , CanShoot = false, ShootOrMove = false;
+        public static int Test;
+        bool CanMove = true, CanShoot = false, ShootOrMove = false;
         Random rnd = new Random();
-        
-        BindingList<Grid_Items> floor  = new BindingList<Grid_Items>();
+
+        BindingList<Grid_Items> floor = new BindingList<Grid_Items>();
         Player player = new Player();
         List<Enemy> enemy = new List<Enemy>();
         
@@ -39,7 +40,7 @@ namespace WindowsFormsApp1
                     Yposition++;
                 }
             }
-
+          
             for (int a = 0; a < 4 ; a++)
             {
                 EnPosX++;
@@ -70,6 +71,8 @@ namespace WindowsFormsApp1
           
 
         }
+        
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -99,6 +102,7 @@ namespace WindowsFormsApp1
                 //this.Hide();
                 Accuracy a = new Accuracy();
                 a.Show();
+                Test = MousePosX;
                // Close.Enabled = true;
             }
             
