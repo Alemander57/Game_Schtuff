@@ -16,7 +16,7 @@ namespace WindowsFormsApp1
 
         public int Xposition = 0, Yposition = 0, MousePosX, MousePosY, PlayerPosX, PlayerPosY, EnPosX = 4, EnPosY = 5, UV,
             AddEnemyC;
-        public static int Test;
+        public static int Test,AccDiff;
         bool CanMove = true, CanShoot = false, ShootOrMove = false;
         Random rnd = new Random();
 

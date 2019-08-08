@@ -34,16 +34,19 @@
             this.Game_Timer = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.GlobalVarTest = new System.Windows.Forms.TextBox();
+            this.AlienTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Peru;
-            this.panel1.Location = new System.Drawing.Point(12, 52);
+            this.panel1.Location = new System.Drawing.Point(10, 50);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(397, 386);
+            this.panel1.Size = new System.Drawing.Size(400, 400);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             // 
             // Close
             // 
@@ -75,11 +78,17 @@
             this.GlobalVarTest.Size = new System.Drawing.Size(100, 20);
             this.GlobalVarTest.TabIndex = 2;
             // 
+            // AlienTimer
+            // 
+            this.AlienTimer.Enabled = true;
+            this.AlienTimer.Interval = 500;
+            this.AlienTimer.Tick += new System.EventHandler(this.AlienTimer_Tick);
+            // 
             // Accuracy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 450);
+            this.ClientSize = new System.Drawing.Size(484, 461);
             this.Controls.Add(this.GlobalVarTest);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
@@ -100,5 +109,6 @@
         private System.Windows.Forms.Timer Game_Timer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox GlobalVarTest;
+        private System.Windows.Forms.Timer AlienTimer;
     }
 }
