@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acc.cs" />
     <Compile Include="Accuracy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +125,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Reticle2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Miss.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

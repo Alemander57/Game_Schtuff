@@ -19,11 +19,8 @@ namespace WindowsFormsApp1
         Reticle reticle = new Reticle();
         Enemy enemy = new Enemy(1,1);
         public Accuracy()
-        {InitializeComponent();
-            
-
-
-
+        {
+            InitializeComponent();
         }
 
         private void Accuracy_Load(object sender, EventArgs e)
@@ -87,12 +84,16 @@ namespace WindowsFormsApp1
             enemy.y = rnd.Next(0, 350);
         }
 
+        private void Accuracy_MouseMove(object sender, MouseEventArgs e)
+        {
+            Cursor.Show();
+        }
+
         private void Game_Timer_Tick(object sender, EventArgs e)
         {
             //VarSet = Form1.MousePosX;
-            GlobalVarTest.Text = Form1.Test.ToString();
-            panel1.Invalidate();
-                
+            GlobalVarTest.Text = score.ToString();
+            panel1.Invalidate();        
         }
     }
 }

@@ -22,6 +22,7 @@ namespace WindowsFormsApp1
 
         BindingList<Grid_Items> floor = new BindingList<Grid_Items>();
         Player player = new Player();
+        Acc acc = new Acc();
         List<Enemy> enemy = new List<Enemy>();
         
         public Form1()
@@ -124,6 +125,7 @@ namespace WindowsFormsApp1
                 b.DrawEnemy(g);
             }
             player.DrawPlayer(g);
+            acc.DrawAcc(g);
            
 
         }
@@ -192,14 +194,23 @@ namespace WindowsFormsApp1
                 }
                 if (CanShoot == true && CanMove == false)
                 {
-                    foreach (Enemy b in enemy)
-                    {
-                        if (b.EnemyRec.IntersectsWith(f.FloorRec) && f.FloorRec.Contains(e.Location))
+                    
+                        foreach (Enemy b in enemy)
                         {
-                            enemy.Remove(b);
-                            break;
+                            if (b.EnemyRec.IntersectsWith(f.FloorRec) && f.FloorRec.Contains(e.Location))
+                            {
+                            Accuracy a = new Accuracy();
+                            a.Show();
+                            if (Accuracy.EndScore > 7)
+                               {
+
+                                enemy.Remove(b);
+                                break;
+                                
+                               }
+                            }
                         }
-                    }
+                    
                 }
                 if (CanMove == true && CanShoot == false)
                 {
@@ -343,7 +354,9 @@ namespace WindowsFormsApp1
       
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
-        { foreach (Grid_Items f in floor)
+        {
+            Cursor.Show();
+            foreach (Grid_Items f in floor)
             {
                 if (f.FloorRec.Contains(e.Location))
                     {
