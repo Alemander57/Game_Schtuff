@@ -37,6 +37,7 @@
             this.YPosBox = new System.Windows.Forms.TextBox();
             this.EnemyX = new System.Windows.Forms.Label();
             this.EnXDisp = new System.Windows.Forms.TextBox();
+            this.DID = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // MainTimer
@@ -105,6 +106,11 @@
             this.EnXDisp.Size = new System.Drawing.Size(84, 20);
             this.EnXDisp.TabIndex = 5;
             // 
+            // DID
+            // 
+            this.DID.Interval = 1;
+            this.DID.Tick += new System.EventHandler(this.DID_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -141,6 +147,7 @@
         private System.Windows.Forms.TextBox YPosBox;
         private System.Windows.Forms.Label EnemyX;
         private System.Windows.Forms.TextBox EnXDisp;
+        public System.Windows.Forms.Timer DID;
     }
 }
 

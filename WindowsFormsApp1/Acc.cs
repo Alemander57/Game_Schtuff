@@ -15,8 +15,8 @@ namespace WindowsFormsApp1
 
         public Acc()
         {
-            x = 0;
-            y = 0;
+            x = -122;
+            y = -122;
             AccImg = Properties.Resources.Hit;
             width = 50;
             height = 25;

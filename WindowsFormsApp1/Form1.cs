@@ -24,7 +24,32 @@ namespace WindowsFormsApp1
         Player player = new Player();
         Acc acc = new Acc();
         List<Enemy> enemy = new List<Enemy>();
-        
+
+        private void DID_Tick(object sender, EventArgs e)
+        {
+            foreach (Enemy b in enemy)
+            {
+                if (b.Marked == true)
+                {
+                    acc.x = b.x;
+                    acc.y = b.y;
+                    if (Accuracy.EndScore > 7)
+                    {
+                        acc.AccImg = Properties.Resources.Hit;
+                        enemy.Remove(b);
+                        break;
+                    }
+                    if (Accuracy.EndScore < 8)
+                    {
+                        acc.AccImg = Properties.Resources.Miss;
+                        b.Marked = false;
+                    }
+                }
+            }
+            DID.Enabled = false;
+            MoveAnimation.Enabled = true;
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -98,15 +123,7 @@ namespace WindowsFormsApp1
                
             }
 
-            if (e.KeyCode == Keys.Q)
-            {
-                //this.Hide();
-                Accuracy a = new Accuracy();
-                a.Show();
-                Test = MousePosX;
-               // Close.Enabled = true;
-            }
-            
+        
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -133,10 +150,15 @@ namespace WindowsFormsApp1
         private void MainTimer_Tick(object sender, EventArgs e)
         {
             this.Invalidate();
+            if(Accuracy.DID == 1)
+            {
+                DID.Enabled = true;
+            }
             foreach (Enemy b in enemy)
             {
-               // b.x = (b.EnemyPosX - 1) * 50;
+                // b.x = (b.EnemyPosX - 1) * 50;
                 //b.y = (b.EnemyPosY - 1) * 50;
+                
             }
             if (ShootOrMove == false)
             {
@@ -199,15 +221,11 @@ namespace WindowsFormsApp1
                         {
                             if (b.EnemyRec.IntersectsWith(f.FloorRec) && f.FloorRec.Contains(e.Location))
                             {
-                            Accuracy a = new Accuracy();
-                            a.Show();
-                            if (Accuracy.EndScore > 7)
-                               {
-
-                                enemy.Remove(b);
-                                break;
-                                
-                               }
+                              b.Marked = true;
+                               Accuracy a = new Accuracy();
+                              a.Show();
+                            MoveAnimation.Enabled = false;
+                               
                             }
                         }
                     
@@ -288,7 +306,7 @@ namespace WindowsFormsApp1
                     { b.EnemyPosY = 10; }
 
                     ShootOrMove = false;
-                    MoveAnimation.Enabled = true;
+                   // MoveAnimation.Enabled = true;
                     b.SavePosX = b.EnemyPosX;
                     b.SavePosY = b.EnemyPosY;
                 }
