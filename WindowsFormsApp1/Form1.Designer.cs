@@ -38,6 +38,7 @@
             this.EnemyX = new System.Windows.Forms.Label();
             this.EnXDisp = new System.Windows.Forms.TextBox();
             this.DID = new System.Windows.Forms.Timer(this.components);
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // MainTimer
@@ -111,11 +112,21 @@
             this.DID.Interval = 1;
             this.DID.Tick += new System.EventHandler(this.DID_Tick);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(569, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(36, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "10/10";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 500);
+            this.ClientSize = new System.Drawing.Size(650, 500);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.EnXDisp);
             this.Controls.Add(this.EnemyX);
             this.Controls.Add(this.YPosBox);
@@ -148,6 +159,7 @@
         private System.Windows.Forms.Label EnemyX;
         private System.Windows.Forms.TextBox EnXDisp;
         public System.Windows.Forms.Timer DID;
+        private System.Windows.Forms.Label label3;
     }
 }
 

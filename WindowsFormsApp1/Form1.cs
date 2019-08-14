@@ -48,6 +48,7 @@ namespace WindowsFormsApp1
             }
             DID.Enabled = false;
             MoveAnimation.Enabled = true;
+            Accuracy.EndScore = 0;
         }
 
         public Form1()
@@ -55,18 +56,18 @@ namespace WindowsFormsApp1
             InitializeComponent();
             EnXDisp.Text = ShootOrMove.ToString();
             
-            for (int i = 0; i < (this.Width / 50); i++)
+            for (int i = 0; i < (10); i++)
             {
                 int gridx = (i * 50);
                 Xposition++;
-                for (int l = 0; l < (this.Height / 50); l++)
-                {
+                for (int l = 0; l < (10); l++)
+                {   //Makes Grid squares based on window size
                     int gridy = (l * 50);
                     floor.Add(new Grid_Items((gridx), (gridy), (Xposition), (Yposition)));
                     Yposition++;
                 }
             }
-          
+        
             for (int a = 0; a < 4 ; a++)
             {
                 EnPosX++;
@@ -153,6 +154,7 @@ namespace WindowsFormsApp1
             if(Accuracy.DID == 1)
             {
                 DID.Enabled = true;
+                Accuracy.DID = 0;
             }
             foreach (Enemy b in enemy)
             {
@@ -196,7 +198,9 @@ namespace WindowsFormsApp1
         {
             MoveAnimation.Enabled = true;
             AddEnemyC++;
-                if (AddEnemyC == 5)
+            acc.x = -100;
+            acc.y = -100;
+            if (AddEnemyC == 5)
             {
                 enemy.Add(new Enemy((rnd.Next(1, 11)), (rnd.Next(1, 11))));
                 AddEnemyC = 0;
@@ -248,67 +252,75 @@ namespace WindowsFormsApp1
                 
                 if (CanMove == true | CanShoot == true)
                 {
-                  
+                    if( b.DAP <= 3)
+                    {
+
+                    }
+
+                    if (b.DAP > 3)
+                    {
                         if ((b.EnemyPosX) - player.PlayerX < 0)
-                    {
-                        b.EnemyPosX = rnd.Next(b.EnemyPosX+0,b.EnemyPosX+3);
-                    }
-                    else if ((b.EnemyPosX) - player.PlayerX > 0)
-                    {
-                        b.EnemyPosX = b.EnemyPosX - rnd.Next(0,3) ;
-                    }
-
-                    if ((b.EnemyPosY) - player.PlayerY < 0)
-                    {
-                        b.EnemyPosY = rnd.Next(b.EnemyPosY+0,b.EnemyPosY+3);
-                    }
-                    else if ((b.EnemyPosY) - player.PlayerY > 0)
-                    {
-                        b.EnemyPosY = b.EnemyPosY - rnd.Next(0,3);
-                    }
-
-                    foreach (Enemy eb in enemy) // eb for "Extra Bad"
-                    {
-                        if (b.EnemyPosX == eb.EnemyPosX && b.EnemyPosY == eb.EnemyPosY)
                         {
+                            b.EnemyPosX = rnd.Next(b.EnemyPosX + 0, b.EnemyPosX + 3);
+                        }
+                        else if ((b.EnemyPosX) - player.PlayerX > 0)
+                        {
+                            b.EnemyPosX = b.EnemyPosX - rnd.Next(0, 3);
+                        }
 
-                            if (b.EnemyPosX > b.SavePosX)
-                            {
-                                b.EnemyPosX -= 1;
-                            }
-                            else if ((b.EnemyPosX) < b.SavePosX)
-                            {
-                                b.EnemyPosX += 1;
-                            }
+                        if ((b.EnemyPosY) - player.PlayerY < 0)
+                        {
+                            b.EnemyPosY = rnd.Next(b.EnemyPosY + 0, b.EnemyPosY + 3);
+                        }
+                        else if ((b.EnemyPosY) - player.PlayerY > 0)
+                        {
+                            b.EnemyPosY = b.EnemyPosY - rnd.Next(0, 3);
+                        }
 
-                            if (b.EnemyPosY < b.SavePosY)
+                        foreach (Enemy eb in enemy) // eb for "Extra Bad"
+                        {
+                            if (b.EnemyPosX == eb.EnemyPosX && b.EnemyPosY == eb.EnemyPosY)
                             {
-                                b.EnemyPosY += 1;
-                            }
-                            else if ((b.EnemyPosY) > b.SavePosY)
-                            {
-                                b.EnemyPosY -= 1;
+
+                                if (b.EnemyPosX > b.SavePosX)
+                                {
+                                    b.EnemyPosX -= 1;
+                                }
+                                else if ((b.EnemyPosX) < b.SavePosX)
+                                {
+                                    b.EnemyPosX += 1;
+                                }
+
+                                if (b.EnemyPosY < b.SavePosY)
+                                {
+                                    b.EnemyPosY += 1;
+                                }
+                                else if ((b.EnemyPosY) > b.SavePosY)
+                                {
+                                    b.EnemyPosY -= 1;
+                                }
                             }
                         }
+
+
+                        if (b.EnemyPosX < 1)
+                        { b.EnemyPosX = 1; }
+
+                        if (b.EnemyPosX > 10)
+                        { b.EnemyPosX = 10; }
+
+                        if (b.EnemyPosY < 1)
+                        { b.EnemyPosY = 1; }
+
+                        if (b.EnemyPosY > 10)
+                        { b.EnemyPosY = 10; }
+
+                        ShootOrMove = false;
+                        // MoveAnimation.Enabled = true;
+                        b.SavePosX = b.EnemyPosX;
+                        b.SavePosY = b.EnemyPosY;
+                        b.DAP = (Math.Sqrt(Math.Pow((double)b.EnemyPosX - (double)player.PlayerX, 2) + Math.Pow((double)b.EnemyPosY - (double)player.PlayerY, 2)));
                     }
-
-
-                    if (b.EnemyPosX < 1)
-                    { b.EnemyPosX = 1; }
-
-                    if (b.EnemyPosX > 10)
-                    { b.EnemyPosX = 10; }
-
-                    if (b.EnemyPosY < 1)
-                    { b.EnemyPosY = 1; }
-
-                    if (b.EnemyPosY > 10)
-                    { b.EnemyPosY = 10; }
-
-                    ShootOrMove = false;
-                   // MoveAnimation.Enabled = true;
-                    b.SavePosX = b.EnemyPosX;
-                    b.SavePosY = b.EnemyPosY;
                 }
                
             }
