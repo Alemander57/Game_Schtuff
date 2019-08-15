@@ -9,12 +9,13 @@ namespace WindowsFormsApp1
 {
     class Player
     {
-       public int PlayerX, PlayerY,x,y,width, height ;
+       public int PlayerX, PlayerY,x,y,width, height,HP ;
         public Image PlayerImg;
         public Rectangle PlayerRec;
 
         public Player()
         {
+            HP = 10;
             x = PlayerX;
             y = PlayerY;
             width = 50;

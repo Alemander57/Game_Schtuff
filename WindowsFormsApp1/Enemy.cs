@@ -10,7 +10,7 @@ namespace WindowsFormsApp1
     class Enemy
     {
         public int EnemyPosX, EnemyPosY, x, y, width, height,SavePosX,SavePosY,HP,MaxHP;
-        public double DAP;
+        public double DAP,ADAP;
         public bool Marked;
         public Image EnemyImg;
         public Rectangle EnemyRec,RedHealth,GreenHealth;
@@ -27,6 +27,7 @@ namespace WindowsFormsApp1
             height = 50;
             EnemyImg = Properties.Resources.Alien;
             DAP = 5;
+            ADAP = 5;
 
 
 

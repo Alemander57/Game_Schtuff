@@ -15,7 +15,7 @@ namespace WindowsFormsApp1
         Graphics g;
 
         public int Xposition = 0, Yposition = 0, MousePosX, MousePosY, PlayerPosX, PlayerPosY, EnPosX = 4, EnPosY = 5, UV,
-            AddEnemyC;
+            AddEnemyC,Score;
         public static int Test,AccDiff;
         bool CanMove = true, CanShoot = false, ShootOrMove = false;
         Random rnd = new Random();
@@ -24,6 +24,7 @@ namespace WindowsFormsApp1
         Player player = new Player();
         Acc acc = new Acc();
         List<Enemy> enemy = new List<Enemy>();
+        Reticle reticle = new Reticle();
 
         private void DID_Tick(object sender, EventArgs e)
         {
@@ -35,6 +36,8 @@ namespace WindowsFormsApp1
                     acc.y = b.y;
                     if (Accuracy.EndScore > 7)
                     {
+                        player.HP++;
+                        Score++;
                         acc.AccImg = Properties.Resources.Hit;
                         enemy.Remove(b);
                         break;
@@ -51,11 +54,17 @@ namespace WindowsFormsApp1
             Accuracy.EndScore = 0;
         }
 
+        private void label3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
         public Form1()
         {
             InitializeComponent();
-            EnXDisp.Text = ShootOrMove.ToString();
-            
+            reticle.x = -40;
+            reticle.y = -40;
+
             for (int i = 0; i < (10); i++)
             {
                 int gridx = (i * 50);
@@ -121,7 +130,9 @@ namespace WindowsFormsApp1
             if (e.KeyCode == Keys.X)
             {
                 ShootOrMove = false;
-               
+                reticle.x = -40;
+                reticle.y = -40;
+
             }
 
         
@@ -144,7 +155,8 @@ namespace WindowsFormsApp1
             }
             player.DrawPlayer(g);
             acc.DrawAcc(g);
-           
+            reticle.DrawReticle(g);
+
 
         }
 
@@ -160,7 +172,8 @@ namespace WindowsFormsApp1
             {
                 // b.x = (b.EnemyPosX - 1) * 50;
                 //b.y = (b.EnemyPosY - 1) * 50;
-                
+                b.ADAP = (Math.Sqrt(Math.Pow((double)b.EnemyPosX - (double)player.PlayerX, 2) + Math.Pow((double)b.EnemyPosY - (double)player.PlayerY, 2)));
+
             }
             if (ShootOrMove == false)
             {
@@ -169,12 +182,14 @@ namespace WindowsFormsApp1
             if (ShootOrMove == true)
             {
                 CanMove = false;
+                
             }
             foreach (Grid_Items f in floor)
             {
                
             }
-            EnXDisp.Text = ShootOrMove.ToString();
+            AAScore.Text = Score.ToString();
+            HP.Text = player.HP.ToString();
 
 
         }
@@ -254,7 +269,7 @@ namespace WindowsFormsApp1
                 {
                     if( b.DAP <= 3)
                     {
-
+                        player.HP--;
                     }
 
                     if (b.DAP > 3)
@@ -319,8 +334,9 @@ namespace WindowsFormsApp1
                         // MoveAnimation.Enabled = true;
                         b.SavePosX = b.EnemyPosX;
                         b.SavePosY = b.EnemyPosY;
-                        b.DAP = (Math.Sqrt(Math.Pow((double)b.EnemyPosX - (double)player.PlayerX, 2) + Math.Pow((double)b.EnemyPosY - (double)player.PlayerY, 2)));
+                       
                     }
+                    b.DAP = (Math.Sqrt(Math.Pow((double)b.EnemyPosX - (double)player.PlayerX, 2) + Math.Pow((double)b.EnemyPosY - (double)player.PlayerY, 2)));
                 }
                
             }
@@ -385,13 +401,20 @@ namespace WindowsFormsApp1
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            Cursor.Show();
+            if(ShootOrMove == true)
+            {
+                reticle.x = e.X - 20;
+                reticle.y = e.Y - 20;
+            }
+            else
+            {
+                reticle.x = -40;
+                reticle.y = -40;
+            }
             foreach (Grid_Items f in floor)
             {
                 if (f.FloorRec.Contains(e.Location))
-                    {
-                    XPosBox.Text = f.XPosition.ToString();
-                    YPosBox.Text = f.YPosition.ToString();
+                { 
                     MousePosX = f.XPosition;
                     MousePosY = f.YPosition;
                 }
