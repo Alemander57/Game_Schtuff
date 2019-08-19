@@ -15,8 +15,8 @@ namespace WindowsFormsApp1
         Graphics g;
 
         public int Xposition = 0, Yposition = 0, MousePosX, MousePosY, PlayerPosX, PlayerPosY, EnPosX = 4, EnPosY = 5, UV,
-            AddEnemyC,Score;
-        public static int Test,AccDiff;
+            AddEnemyC;
+        public static int Test,AccDiff, Score;
         bool CanMove = true, CanShoot = false, ShootOrMove = false;
         Random rnd = new Random();
 
@@ -52,6 +52,11 @@ namespace WindowsFormsApp1
             DID.Enabled = false;
             MoveAnimation.Enabled = true;
             Accuracy.EndScore = 0;
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void label3_Click_1(object sender, EventArgs e)
@@ -267,7 +272,7 @@ namespace WindowsFormsApp1
                 
                 if (CanMove == true | CanShoot == true)
                 {
-                    if( b.DAP <= 3)
+                    if( b.DAP <= 3&& b.Marked != true)
                     {
                         player.HP--;
                     }
