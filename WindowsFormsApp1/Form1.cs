@@ -345,6 +345,11 @@ namespace WindowsFormsApp1
                 }
                
             }
+            if (player.HP <= 0)
+            {
+                ScoreSet s = new ScoreSet();
+                s.Show();
+            }
 
             
         }

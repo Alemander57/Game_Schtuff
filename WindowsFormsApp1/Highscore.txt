@@ -1,0 +1,7 @@
+Jacob,20
+Luka,14
+Ty,3
+Jonothan,2
+Jonathan,12
+Lily,9
+Carson,1

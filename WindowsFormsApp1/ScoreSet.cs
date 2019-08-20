@@ -30,5 +30,10 @@ namespace WindowsFormsApp1
             Hide();
             frmScores2.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TBName.Enabled = false;
+        }
     }
 }
