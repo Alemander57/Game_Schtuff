@@ -36,6 +36,8 @@
             this.PlyrScre = new System.Windows.Forms.Label();
             this.lblPlayerScore = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
+            this.ListBoxName = new System.Windows.Forms.ListBox();
+            this.ListBoxScore = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -110,11 +112,29 @@
             this.lblMessage.Size = new System.Drawing.Size(0, 13);
             this.lblMessage.TabIndex = 7;
             // 
+            // ListBoxName
+            // 
+            this.ListBoxName.FormattingEnabled = true;
+            this.ListBoxName.Location = new System.Drawing.Point(30, 29);
+            this.ListBoxName.Name = "ListBoxName";
+            this.ListBoxName.Size = new System.Drawing.Size(64, 199);
+            this.ListBoxName.TabIndex = 8;
+            // 
+            // ListBoxScore
+            // 
+            this.ListBoxScore.FormattingEnabled = true;
+            this.ListBoxScore.Location = new System.Drawing.Point(109, 29);
+            this.ListBoxScore.Name = "ListBoxScore";
+            this.ListBoxScore.Size = new System.Drawing.Size(64, 199);
+            this.ListBoxScore.TabIndex = 9;
+            // 
             // frmScores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(394, 411);
+            this.Controls.Add(this.ListBoxScore);
+            this.Controls.Add(this.ListBoxName);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.lblPlayerScore);
             this.Controls.Add(this.PlyrScre);
@@ -141,5 +161,7 @@
         private System.Windows.Forms.Label PlyrScre;
         private System.Windows.Forms.Label lblPlayerScore;
         private System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.ListBox ListBoxName;
+        private System.Windows.Forms.ListBox ListBoxScore;
     }
 }

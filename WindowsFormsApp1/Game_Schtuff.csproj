@@ -66,6 +66,7 @@
       <DependentUpon>frmScores.cs</DependentUpon>
     </Compile>
     <Compile Include="Grid-Items.cs" />
+    <Compile Include="HighScores.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

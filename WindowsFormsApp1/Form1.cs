@@ -17,7 +17,7 @@ namespace WindowsFormsApp1
         public int Xposition = 0, Yposition = 0, MousePosX, MousePosY, PlayerPosX, PlayerPosY, EnPosX = 4, EnPosY = 5, UV,
             AddEnemyC;
         public static int Test,AccDiff, Score;
-        bool CanMove = true, CanShoot = false, ShootOrMove = false;
+        bool CanMove = true, CanShoot = false, ShootOrMove = false, Play = false;
         Random rnd = new Random();
 
         BindingList<Grid_Items> floor = new BindingList<Grid_Items>();
@@ -59,17 +59,15 @@ namespace WindowsFormsApp1
 
         }
 
-        private void label3_Click_1(object sender, EventArgs e)
+        private void BtnHelp_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show('dfgdfxgdf');
         }
 
-        public Form1()
+        private void BtnPlay_Click(object sender, EventArgs e)
         {
-            InitializeComponent();
-            reticle.x = -40;
-            reticle.y = -40;
-
+            panel1.Visible = false;
+            
             for (int i = 0; i < (10); i++)
             {
                 int gridx = (i * 50);
@@ -81,15 +79,15 @@ namespace WindowsFormsApp1
                     Yposition++;
                 }
             }
-        
-            for (int a = 0; a < 4 ; a++)
+
+            for (int a = 0; a < 4; a++)
             {
                 EnPosX++;
                 EnPosY++;
                 UV++;
                 enemy.Add(new Enemy(EnPosX, EnPosY));
             }
-            
+
             foreach (Grid_Items f in floor)
             {
                 if (player.PlayerRec.IntersectsWith(f.FloorRec))
@@ -109,6 +107,20 @@ namespace WindowsFormsApp1
 
                 }
             }
+        }
+
+        private void label3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
+            reticle.x = -40;
+            reticle.y = -40;
+
+           
           
 
         }
@@ -217,7 +229,7 @@ namespace WindowsFormsApp1
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             MoveAnimation.Enabled = true;
-            AddEnemyC++;
+            
             acc.x = -100;
             acc.y = -100;
             if (AddEnemyC == 5)
@@ -240,8 +252,8 @@ namespace WindowsFormsApp1
                 }
                 if (CanShoot == true && CanMove == false)
                 {
-                    
-                        foreach (Enemy b in enemy)
+                    AddEnemyC++;
+                    foreach (Enemy b in enemy)
                         {
                             if (b.EnemyRec.IntersectsWith(f.FloorRec) && f.FloorRec.Contains(e.Location))
                             {
@@ -258,6 +270,7 @@ namespace WindowsFormsApp1
                 {
                     if (f.FloorRec.Contains(e.Location))
                     {
+                        AddEnemyC++;
                         player.PlayerX = f.XPosition;
                         player.PlayerY = f.YPosition;
 
