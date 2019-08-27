@@ -214,12 +214,13 @@ namespace WindowsFormsApp1
                
                 if (CanShoot == true && CanMove == false)
                 {
-                    AddEnemyC++; // adds to the new enemy counter
+                   
                     foreach (Enemy b in enemy)
                         {
                             if (b.EnemyRec.IntersectsWith(f.FloorRec) && f.FloorRec.Contains(e.Location))
                             {
-                              b.Marked = true;
+                            AddEnemyC++; // adds to the new enemy counter
+                            b.Marked = true;
                                Accuracy a = new Accuracy();
                               a.Show();
                             MoveAnimation.Enabled = false;
