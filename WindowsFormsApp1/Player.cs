@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
        public int PlayerX, PlayerY,x,y,width, height,HP ;
         public Image PlayerImg;
         public Rectangle PlayerRec;
-
+        //all the classes are pretty basic, they're mostly just visual placeholders
         public Player()
         {
             HP = 10;

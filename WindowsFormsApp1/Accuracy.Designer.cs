@@ -135,8 +135,6 @@
             this.Name = "Accuracy";
             this.Text = "Accuracy";
             this.Load += new System.EventHandler(this.Accuracy_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Accuracy_KeyDown);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Accuracy_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Accuracy_MouseMove);
             this.ResumeLayout(false);
             this.PerformLayout();

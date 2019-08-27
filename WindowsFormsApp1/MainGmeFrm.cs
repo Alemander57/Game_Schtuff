@@ -10,14 +10,15 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class MainGmeFrm : Form
     {
         Graphics g;
 
         public int Xposition = 0, Yposition = 0, MousePosX, MousePosY, PlayerPosX, PlayerPosY, EnPosX = 4, EnPosY = 5, UV,
             AddEnemyC;
         public static int Test,AccDiff, Score;
-        bool CanMove = true, CanShoot = false, ShootOrMove = false, Play = false;
+        public static bool Tutorial = false;
+        bool CanMove = true, CanShoot = false, ShootOrMove = false;
         Random rnd = new Random();
 
         BindingList<Grid_Items> floor = new BindingList<Grid_Items>();
@@ -33,14 +34,14 @@ namespace WindowsFormsApp1
                 if (b.Marked == true)
                 {
                     acc.x = b.x;
-                    acc.y = b.y;
+                    acc.y = b.y;  //this puts the "hit" or "miss" Icon where the enemy is or was
                     if (Accuracy.EndScore > 7)
                     {
                         player.HP++;
                         Score++;
                         acc.AccImg = Properties.Resources.Hit;
                         enemy.Remove(b);
-                        break;
+                        break; //removes an enemy from the map
                     }
                     if (Accuracy.EndScore < 8)
                     {
@@ -61,13 +62,13 @@ namespace WindowsFormsApp1
 
         private void BtnHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show('dfgdfxgdf');
+            MessageBox.Show("Stay out of the range of the aliens (3 squares) while weaving in to make you own attacks");
         }
 
         private void BtnPlay_Click(object sender, EventArgs e)
         {
             panel1.Visible = false;
-            
+            panel1.Enabled = false;
             for (int i = 0; i < (10); i++)
             {
                 int gridx = (i * 50);
@@ -79,7 +80,7 @@ namespace WindowsFormsApp1
                     Yposition++;
                 }
             }
-
+            //starts the game and draws up the grid and enemies
             for (int a = 0; a < 4; a++)
             {
                 EnPosX++;
@@ -96,7 +97,7 @@ namespace WindowsFormsApp1
                     player.PlayerY = f.YPosition;
                 }
                 foreach (Enemy b in enemy)
-                {
+                {   //links the values for player grid location to the grid
                     if (b.EnemyRec.IntersectsWith(f.FloorRec))
                     {
                         b.EnemyPosX = f.XPosition;
@@ -107,36 +108,15 @@ namespace WindowsFormsApp1
 
                 }
             }
+            player.PlayerY = 1;
+            player.PlayerX = 1;
         }
-
-        private void label3_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        public Form1()
+        public MainGmeFrm()
         {
             InitializeComponent();
             reticle.x = -40;
             reticle.y = -40;
-
-           
-          
-
         }
-        
-
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Z)
@@ -160,7 +140,7 @@ namespace WindowsFormsApp1
             
             //get the graphics used to paint on the panel control
             g = e.Graphics;
-            //call the Planet class's DrawPlanet method to draw the image planet1 
+         
            
             foreach (Grid_Items f in floor)
             {
@@ -173,12 +153,13 @@ namespace WindowsFormsApp1
             player.DrawPlayer(g);
             acc.DrawAcc(g);
             reticle.DrawReticle(g);
-
+            //draws all the things where they should be
 
         }
 
         private void MainTimer_Tick(object sender, EventArgs e)
         {
+            //game doesn't super rely on a timer as it's turn based, just checking if enemies can shoot the player or whether the player is in shoot or move mode
             this.Invalidate();
             if(Accuracy.DID == 1)
             {
@@ -187,8 +168,7 @@ namespace WindowsFormsApp1
             }
             foreach (Enemy b in enemy)
             {
-                // b.x = (b.EnemyPosX - 1) * 50;
-                //b.y = (b.EnemyPosY - 1) * 50;
+              
                 b.ADAP = (Math.Sqrt(Math.Pow((double)b.EnemyPosX - (double)player.PlayerX, 2) + Math.Pow((double)b.EnemyPosY - (double)player.PlayerY, 2)));
 
             }
@@ -211,29 +191,18 @@ namespace WindowsFormsApp1
 
         }
 
-        private void Form1_SizeChanged(object sender, EventArgs e)
-        {
-           // floor.Clear();
-           // for (int i = 0; i < ((this.Width / 50)+1); i++)
-           // {
-                
-           //     int gridx = (i * 50);
-            //    for (int l = 0; l < ((this.Height / 50)+1); l++)
-           //     {
-          //          int gridy = (l * 50);
-          //          floor.Add(new Grid_Items((gridx), (gridy)));
-           //     }
-           // }
-      }
-
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             MoveAnimation.Enabled = true;
-            
-            acc.x = -100;
-            acc.y = -100;
-            if (AddEnemyC == 5)
+          
+            if (player.HP >10)
             {
+                player.HP = 10;
+            }
+            acc.x = -100;
+            acc.y = -100;//moves hit or miss icons off the screen
+            if (AddEnemyC == 5)
+            {//adds a new enemy after 5 turns
                 enemy.Add(new Enemy((rnd.Next(1, 11)), (rnd.Next(1, 11))));
                 AddEnemyC = 0;
                 
@@ -242,17 +211,10 @@ namespace WindowsFormsApp1
             {
 
 
-                foreach (Enemy b in enemy)
-                {
-                    if (b.EnemyRec.IntersectsWith(f.FloorRec))
-                    {
-                        //b.EnemyPosX = f.XPosition;
-                        //b.EnemyPosY = f.YPosition;
-                    }
-                }
+               
                 if (CanShoot == true && CanMove == false)
                 {
-                    AddEnemyC++;
+                    AddEnemyC++; // adds to the new enemy counter
                     foreach (Enemy b in enemy)
                         {
                             if (b.EnemyRec.IntersectsWith(f.FloorRec) && f.FloorRec.Contains(e.Location))
@@ -261,15 +223,16 @@ namespace WindowsFormsApp1
                                Accuracy a = new Accuracy();
                               a.Show();
                             MoveAnimation.Enabled = false;
+                            //opens accuracy minigame
                                
                             }
                         }
                     
                 }
-                if (CanMove == true && CanShoot == false)
+                if (CanMove == true & CanShoot == false)
                 {
                     if (f.FloorRec.Contains(e.Location))
-                    {
+                    {//tells the timer where the player should be
                         AddEnemyC++;
                         player.PlayerX = f.XPosition;
                         player.PlayerY = f.YPosition;
@@ -280,12 +243,15 @@ namespace WindowsFormsApp1
 
                 }
             }
-            foreach (Enemy b in enemy) // b for bad
+            if (CanMove == true | CanShoot == true)
+            {
+               
+                foreach (Enemy b in enemy) // b for bad
             {
                 
-                if (CanMove == true | CanShoot == true)
-                {
-                    if( b.DAP <= 3&& b.Marked != true)
+              
+                 
+                    if ( b.DAP <= 3&& b.Marked != true)
                     {
                         player.HP--;
                     }
@@ -362,19 +328,14 @@ namespace WindowsFormsApp1
             {
                 ScoreSet s = new ScoreSet();
                 s.Show();
+                MainTimer.Enabled = false;
+                this.Hide();
+                //sets the players score and ends the game
             }
 
             
         }
-
-        private void Form1_MouseHover(object sender, EventArgs e)
-        {
-            
-
-
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
+        private void MoveAnimation_Tick(object sender, EventArgs e)
         {
             
             foreach (Enemy b in enemy)
@@ -395,11 +356,7 @@ namespace WindowsFormsApp1
                 {
                     b.y-=5;
                 }
-                
-                //if(b.x == (b.EnemyPosX - 1) * 50 && b.y == (b.EnemyPosY -1)*50)
-                //{
-                //    MoveAnimation.Enabled = false;
-                //}
+                //moves the player and enemy after the players turn
             }
             if (player.x < (player.PlayerX - 1) * 50)
             {
@@ -420,14 +377,15 @@ namespace WindowsFormsApp1
 
 
         }
-      
+
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if(ShootOrMove == true)
+            if (ShootOrMove == true)
             {
                 reticle.x = e.X - 20;
                 reticle.y = e.Y - 20;
+                //have a reticle follow the mouse when the player wants to shoot
             }
             else
             {
@@ -437,7 +395,7 @@ namespace WindowsFormsApp1
             foreach (Grid_Items f in floor)
             {
                 if (f.FloorRec.Contains(e.Location))
-                { 
+                {
                     MousePosX = f.XPosition;
                     MousePosY = f.YPosition;
                 }
@@ -448,9 +406,9 @@ namespace WindowsFormsApp1
                     if (ShootOrMove == false)
                     { CanMove = false; }
 
-                    if(ShootOrMove == true)
+                    if (ShootOrMove == true)
                     { CanShoot = false; }
-                }
+                }//all this is for the different highlights the grid can have as you mouse over it
                 else if (f.FloorRec.Contains(e.Location) && (MousePosX - player.PlayerX) <= 3 && (MousePosX - player.PlayerX) >= -3
                      && (MousePosY - player.PlayerY) <= 3 && (MousePosY - player.PlayerY) >= -3)
                 {
@@ -472,16 +430,11 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                  f.Floor_Image = Properties.Resources.Base_Grid_Item2;
+                    f.Floor_Image = Properties.Resources.Base_Grid_Item2;
                 }
 
-               
+
             }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

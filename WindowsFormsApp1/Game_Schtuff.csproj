@@ -53,11 +53,11 @@
       <DependentUpon>Accuracy.cs</DependentUpon>
     </Compile>
     <Compile Include="Enemy.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="MainGmeFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainGmeFrm.Designer.cs">
+      <DependentUpon>MainGmeFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="frmScores.cs">
       <SubType>Form</SubType>
@@ -80,8 +80,8 @@
     <EmbeddedResource Include="Accuracy.resx">
       <DependentUpon>Accuracy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="MainGmeFrm.resx">
+      <DependentUpon>MainGmeFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmScores.resx">
       <DependentUpon>frmScores.cs</DependentUpon>

@@ -15,7 +15,7 @@ namespace WindowsFormsApp1
         public ScoreSet()
         {
             InitializeComponent();
-            TBScore.Text = Form1.Score.ToString();
+            TBScore.Text = MainGmeFrm.Score.ToString();
         }
 
         private void button3_Click(object sender, EventArgs e)

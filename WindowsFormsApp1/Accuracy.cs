@@ -13,7 +13,7 @@ namespace WindowsFormsApp1
     public partial class Accuracy : Form
     {
         Graphics g;
-        int VarSet,score,Time;
+        int score,Time;
         public static int EndScore,DID;
         Random rnd = new Random();
         Reticle reticle = new Reticle();
@@ -26,10 +26,15 @@ namespace WindowsFormsApp1
             TimeBox.Text = Time.ToString();
            // Cursor.Position = (0);
         }
-
+        //this is all just catch the alien, nothing too exciting...took me like 5 minutes to make
         private void Accuracy_Load(object sender, EventArgs e)
         {
-
+            if(MainGmeFrm.Tutorial ==false)
+            {
+                MessageBox.Show("click on the aliens as they appear to up your score!", 
+                    "Score above 8 to hit your enemy!");
+                MainGmeFrm.Tutorial = true;
+            }
         }
 
        public void Close_Tick(object sender, EventArgs e)
@@ -39,20 +44,7 @@ namespace WindowsFormsApp1
             DID = 1;
         }
 
-        private void Accuracy_MouseDown(object sender, MouseEventArgs e)
-        {
 
-        }
-
-        private void Accuracy_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.W)
-            {
-                this.Close();
-
-
-            }
-        }
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {

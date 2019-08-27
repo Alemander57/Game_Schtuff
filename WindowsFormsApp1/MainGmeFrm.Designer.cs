@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Form1
+    partial class MainGmeFrm
     {
         /// <summary>
         /// Required designer variable.
@@ -57,7 +57,7 @@
             // MoveAnimation
             // 
             this.MoveAnimation.Interval = 20;
-            this.MoveAnimation.Tick += new System.EventHandler(this.timer1_Tick);
+            this.MoveAnimation.Tick += new System.EventHandler(this.MoveAnimation_Tick);
             // 
             // DID
             // 
@@ -81,7 +81,7 @@
             this.label3.Size = new System.Drawing.Size(24, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "/10";
-            this.label3.Click += new System.EventHandler(this.label3_Click_1);
+         
             // 
             // label1
             // 
@@ -191,7 +191,7 @@
             this.panel1.Size = new System.Drawing.Size(500, 500);
             this.panel1.TabIndex = 18;
             // 
-            // Form1
+            // MainGmeFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -209,14 +209,11 @@
             this.Controls.Add(this.HP);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
+            this.Name = "MainGmeFrm";
+            this.Text = "XCOM BUT WORSE";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
-            this.MouseHover += new System.EventHandler(this.Form1_MouseHover);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

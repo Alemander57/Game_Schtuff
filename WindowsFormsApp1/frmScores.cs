@@ -64,7 +64,7 @@ namespace WindowsFormsApp1
             {
                 lblMessage.Text = "Keep trying to make the top ten!";
             }
-
+            SortHighScores();
             DisplayHighScores();
         }
 
